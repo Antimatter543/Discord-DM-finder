@@ -1,11 +1,12 @@
 # Discord DM Finder
 I made this because I couldn't find another solution online, other than one where you had to download an .exe from a google drive. 
 The script helps you locate all messages, including message histories that you have closed before and can't open (i.e you don't remember their ID or name, and aren't friends).
+Tested on Windows.
 
 ## Instructions
 1. Download your Discord Package, and unzip it in this directory, placing 'packages' at the same level as this README and main.py.
-
-2. Create a constants.py file on the directory, and put the below into it, replacing the XXX's with your discord ID. If you do not want to filter against closed messages, don't touch the other variables.
+2. Make a venv and type ```pip install requirements.txt``` into terminal.
+3. Create a constants.py file on the directory, and put the below into it, replacing the XXX's with your discord ID. If you do not want to filter against closed messages, don't touch the other variables.
 ```
 MY_ID = XXXXXXXXXXXXXXXXXX
 
