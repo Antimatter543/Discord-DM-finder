@@ -5,7 +5,6 @@ from constants import MIN_ROWS, MY_ID
 from pprint import pprint
 
 
-
 message_list = os.listdir('package/messages/')
 # print("Files and directories in messages directory :")
 # print(message_list) # List
@@ -14,7 +13,6 @@ message_list = os.listdir('package/messages/')
 # List of people who we care about -- everyone who's a DM, everyone who's filtered.
 dm_ids = {'other': {}, 'filtered_dms': {}}
 direct_messages = {}
-
 
 for message in message_list:
     # print("we're in here now")
@@ -45,47 +43,34 @@ for message in message_list:
                 direct_messages[message_id] = {"recipient": their_id, "first_messaged": oldest_message,
                                                "message_folder": "package/messages/"+message+'/', "num_messages": num_rows}
 
-                # # Filter
-                # if num_rows > MIN_ROWS:
-                # 	dm_ids['filtered_dms'][message_id] = {"recipient": their_id, "first_messaged": oldest_message, "message_folder": message, "num_messages": num_rows }
-                # else:
-                # 	# Any non filtered stuff (if you wanted to use it)
-                # 	dm_ids['other'][message_id] = {"recipient": their_id, "first_messaged": oldest_message, "message_folder": message, "num_messages": num_rows }
-
-# pprint(direct_messages)
-
-
-# print("Number of DMs found in total:", (len(direct_messages)),
-    #   "Number of DMS with larger length than", length_filter, ":", len(filtered_dms))
-
-# if input("Do you want to only see messages you've closed? y/n") == 'y':
-
-
-# pprint(closed_filtered_messages)
-# print(
-#     f"Length of just closed messages (no min length filter): {len(closed_messages)}, Length of closed + filtered messages: {len(closed_filtered_messages)}")
-
 while True:
-    ### Create the message dicts
+    # Create the message dicts
     length_filter = int(
-    input("Minimum length of message history (only counts your messages): "))
+        input("Minimum length of message history (only counts your messages): "))
     filtered_dms = get_dms_greater_than(direct_messages, length_filter)
     closed_messages = {}
     closed_messages = get_closed_dms(direct_messages)
     closed_filtered_messages = get_closed_dms(filtered_dms)
 
-    ## Ask user what type of dictionary they want
-    ask = int(input(f"""What do you want to print? \n
-    1: Everything(Dict contains {len(direct_messages)} message IDs)
-    \n2: All DMS with length filter (Dict contains {len(filtered_dms)} message IDs)
-    \n3: All closed DMS (Dict contains {len(closed_messages)} message IDs)
-    \n4: All closed + filtered dms (Dict contains {len(closed_filtered_messages)} message IDs)
-    \nType a number: """))
+    # Ask user what type of dictionary they want
+
+    try:
+        ask = int(input(f"""What do you want to see? Shown in effectively oldest-newest order.
+    \n1: Everything(Dict contains {len(direct_messages)} message IDs)
+    \n2: All DMS with length filter(Dict contains {len(filtered_dms)} message IDs)
+    \n3: All closed DMS(Dict contains {len(closed_messages)} message IDs)
+    \n4: All closed + filtered dms(Dict contains {len(closed_filtered_messages)} message IDs)
+    \nType the number of your chosen option: """))
+    except ValueError:
+        print("Try again, that's not an integer")
+        continue
     if ask == 1:
         pprint(direct_messages)
     elif ask == 2:
         pprint(filtered_dms)
     elif ask == 3:
         pprint(closed_messages)
-    else:
+    elif ask == 4:
         pprint(closed_filtered_messages)
+    else:
+        print("Try again -- Type a number from 1-4.")

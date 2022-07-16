@@ -6,10 +6,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 import json 
+import chromedriver_autoinstaller 
 from constants import CHROMEDRIVER_PATH, DISCORD_EMAIL, PASSWORD
 
 """This is us trying to get all the message IDs / currently open in YOUR discord dms. Nothing is sent anywhere else. This file just makes a browser, logs into discord w/ whatever you type in constants, gets the IDs, puts it in data.txt (in this directory) and exits.
 """
+chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
+# and if it doesn't exist, download it automatically,
+# then add chromedriver to path
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--incognito")
@@ -22,8 +26,7 @@ driver.delete_all_cookies()
 # Go to facebook, type in details
 driver.get('https://discord.com/login')
 
-#Start users and pass
-
+# Enters user and pass 
 driver.find_element(By.XPATH, '//*[@name="email"]').send_keys(DISCORD_EMAIL)
 
 inputa = WebDriverWait(driver, 10).until(
@@ -39,22 +42,19 @@ inputa = WebDriverWait(driver, 10).until(
 inputa.click()
 time.sleep(3)
 
-driver.get("https://discord.com/channels/@me")
-
 ## In DMS.
+driver.get("https://discord.com/channels/@me")
 time.sleep(6)
-# myElem = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, '//*[@aria-label="Direct Messages"]')))
+
 
 dm_class = driver.find_element(By.XPATH, '//*[@aria-label="Direct Messages"]')
 options = dm_class.find_elements(By.TAG_NAME, "li")
-# print(options)
 data = [] 
 count = 0 
-# It doesn't re-get the options, which I think is the problem.
 new_aria = 2
 old_aria = 0
 
-
+# Keep going through DMs, putting Ids in data until you reach the end
 while True: 
 	new_aria += 1
 	try:

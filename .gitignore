@@ -4,3 +4,4 @@ constants.py
 data.txt
 test.py
 __pycache__/
+venv/
