@@ -53,23 +53,28 @@ for message in message_list:
                 # 	dm_ids['other'][message_id] = {"recipient": their_id, "first_messaged": oldest_message, "message_folder": message, "num_messages": num_rows }
 
 # pprint(direct_messages)
-length_filter = int(
-    input("Minimum length of message history (only counts your messages): "))
-filtered_dms = get_dms_greater_than(direct_messages, length_filter)
+
 
 # print("Number of DMs found in total:", (len(direct_messages)),
     #   "Number of DMS with larger length than", length_filter, ":", len(filtered_dms))
 
 # if input("Do you want to only see messages you've closed? y/n") == 'y':
-closed_messages = {}
-closed_messages = get_closed_dms(direct_messages)
-closed_filtered_messages = get_closed_dms(filtered_dms)
+
 
 # pprint(closed_filtered_messages)
 # print(
 #     f"Length of just closed messages (no min length filter): {len(closed_messages)}, Length of closed + filtered messages: {len(closed_filtered_messages)}")
 
 while True:
+    ### Create the message dicts
+    length_filter = int(
+    input("Minimum length of message history (only counts your messages): "))
+    filtered_dms = get_dms_greater_than(direct_messages, length_filter)
+    closed_messages = {}
+    closed_messages = get_closed_dms(direct_messages)
+    closed_filtered_messages = get_closed_dms(filtered_dms)
+
+    ## Ask user what type of dictionary they want
     ask = int(input(f"""What do you want to print? \n
     1: Everything(Dict contains {len(direct_messages)} message IDs)
     \n2: All DMS with length filter (Dict contains {len(filtered_dms)} message IDs)
