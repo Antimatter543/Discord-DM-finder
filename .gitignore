@@ -1,0 +1,6 @@
+package/
+notes.txt
+constants.py
+data.txt
+test.py
+__pycache__/
