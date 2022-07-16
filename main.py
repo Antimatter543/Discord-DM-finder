@@ -49,21 +49,24 @@ while True:
         input("Minimum length of message history (only counts your messages): "))
     filtered_dms = get_dms_greater_than(direct_messages, length_filter)
     closed_messages = {}
-    closed_messages = get_closed_dms(direct_messages)
-    closed_filtered_messages = get_closed_dms(filtered_dms)
+    closed_filtered_messages = {}
+    if os.stat('data.txt') != 0: # Create filtered dms if data not empty
+        closed_messages = get_closed_dms(direct_messages)
+        closed_filtered_messages = get_closed_dms(filtered_dms)
 
     # Ask user what type of dictionary they want
 
     try:
         ask = int(input(f"""What do you want to see? Shown in effectively oldest-newest order.
-    \n1: Everything(Dict contains {len(direct_messages)} message IDs)
-    \n2: All DMS with length filter(Dict contains {len(filtered_dms)} message IDs)
-    \n3: All closed DMS(Dict contains {len(closed_messages)} message IDs)
-    \n4: All closed + filtered dms(Dict contains {len(closed_filtered_messages)} message IDs)
-    \nType the number of your chosen option: """))
+    \n1: Everything (Dict contains {len(direct_messages)} message IDs)
+    \n2: All DMS with length filter (Dict contains {len(filtered_dms)} message IDs)
+    \n3: All closed DMS (Dict contains {len(closed_messages)} message IDs) | Needs data.txt
+    \n4: All closed + filtered dms (Dict contains {len(closed_filtered_messages)} message IDs) | Needs data.txt
+    \nType the number of your chosen option : """))
     except ValueError:
         print("Try again, that's not an integer")
         continue
+
     if ask == 1:
         pprint(direct_messages)
     elif ask == 2:
