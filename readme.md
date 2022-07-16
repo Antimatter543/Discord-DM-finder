@@ -1,5 +1,5 @@
 # Discord DM Finder
-I made this because I couldn't find another solution online, other than one where you had to download an .exe from a google drive. 
+I made this [Discord DM Finder](https://discord.com/) because I couldn't find another solution online, other than one where you had to download an .exe from a google drive. 
 The script helps you locate all messages, including message histories that you have closed before and can't open (i.e you don't remember their ID or name, and aren't friends).
 Tested on Windows.
 
