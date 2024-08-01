@@ -1,4 +1,7 @@
 # Discord DM Finder
+Ever wanted to find someone's DMs with you again, if you had already closed them and blocked them, or are no longer friends with them? This solves that!
+
+
 I made this [Discord DM Finder](https://discord.com/) because I couldn't find another solution online, other than one where you had to download an .exe from a google drive. 
 The script helps you locate all messages, including message histories that you have closed before and can't open (i.e you don't remember their ID or name, and aren't friends).
 Tested on Windows.
